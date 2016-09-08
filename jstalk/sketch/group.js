@@ -1,0 +1,2 @@
+var Group = new function() {
+}

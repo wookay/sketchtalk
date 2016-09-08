@@ -1,0 +1,2 @@
+var Document = new function() {
+}

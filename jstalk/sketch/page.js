@@ -1,0 +1,2 @@
+var Page = new function() {
+}

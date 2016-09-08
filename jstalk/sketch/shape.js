@@ -1,0 +1,2 @@
+var Shape = new function() {
+}

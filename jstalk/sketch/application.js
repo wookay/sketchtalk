@@ -1,0 +1,2 @@
+var Application = new function() {
+}

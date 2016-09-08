@@ -1,0 +1,2 @@
+var Text = new function() {
+}

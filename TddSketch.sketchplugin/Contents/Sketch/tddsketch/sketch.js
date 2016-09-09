@@ -1,14 +1,14 @@
 // sketch.js
 
-// jstalk.include("sketchtalk/sketch/application.js")
-// jstalk.include("sketchtalk/sketch/document.js")
-// jstalk.include("sketchtalk/sketch/rectangle.js")
-// jstalk.include("sketchtalk/sketch/group.js")
-// jstalk.include("sketchtalk/sketch/text.js")
-// jstalk.include("sketchtalk/sketch/image.js")
-// jstalk.include("sketchtalk/sketch/shape.js")
-// jstalk.include("sketchtalk/sketch/artboard.js")
-// jstalk.include("sketchtalk/sketch/page.js")
+// jstalk.include("tddsketch/sketch/application.js")
+// jstalk.include("tddsketch/sketch/document.js")
+// jstalk.include("tddsketch/sketch/rectangle.js")
+// jstalk.include("tddsketch/sketch/group.js")
+// jstalk.include("tddsketch/sketch/text.js")
+// jstalk.include("tddsketch/sketch/image.js")
+// jstalk.include("tddsketch/sketch/shape.js")
+// jstalk.include("tddsketch/sketch/artboard.js")
+// jstalk.include("tddsketch/sketch/page.js")
 
 var Sketch = new function() {
     this.doc = undefined

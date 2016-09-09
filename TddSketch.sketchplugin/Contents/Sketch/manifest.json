@@ -1,11 +1,11 @@
 {
-    "name": "SketchTalk",
-    "description": "Regression Tests in Sketch",
+    "name": "TddSketch",
+    "description": "Regression Testing in Sketch",
     "author": "WooKyoung Noh",
     "authorEmail": "wookay.noh@gmail.com",
-    "homepage": "https://github.com/wookay/sketchtalk",
+    "homepage": "https://github.com/wookay/tddsketch",
     "version": "0.0.1",
-    "identifier": "sketchtalk",
+    "identifier": "tddsketch",
     "commands": [{
         "name": "run regressIon tests",
         "identifier": "run_on_plugins",

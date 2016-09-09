@@ -5,8 +5,10 @@ Test = {}
 DOT = "."
 LF = "\n"
 
+
 function puts(str) {
-  print(str)
+    print(str)
+    return str
 }
 
 function inspect(value) {
@@ -32,7 +34,11 @@ assert_equal = function(expected, got) {
 }
 
 assert = function(got) {
-  _assert_equal(true, got, deep_equal(true, got))
+   if (1==arguments.length) {
+       _assert_equal(true, got, deep_equal(true, got))
+   } else {
+       throw new Error("assert: wrong arguments (expected 1)")
+   }
 }
 
 var _assert_equal = function(expected, got, is_true) {
@@ -51,13 +57,16 @@ var _assert_equal = function(expected, got, is_true) {
         }
     }
     UnitTest.passed_in_progress = 0
-    puts(with_color('red', "Assertion failed") + " in " +
-         with_color('cyan', extract_filename_line_from_stack_trace()))
-    puts("Expected: " + with_color('white', inspect(expected)))
-    puts("Got: " + with_color('cyan', inspect(got)))
-    //puts("")
+    puts(string_with_color('red', "Assertion failed") + " in " +
+         string_with_color('cyan', extract_filename_line_from_stack_trace()))
+    puts("Expected: " + string_with_color('cyan', inspect(expected)))
+    puts("Got: " + string_with_color('white', inspect(got)))
     UnitTest.failed += 1
   }
+}
+
+var string_with_color = function(color, str) {
+    return UnitTest.have_color ? with_color(color, str) : str
 }
 
 var extract_filename_line_from_stack_trace = function() {
@@ -74,7 +83,9 @@ var extract_filename_line_from_stack_trace = function() {
 }
 
 UnitTest = {
+  suite: undefined,
   target: undefined,
+  have_color: true,
   dot_if_passed: true,
   tests: 0,
   passed: 0,
@@ -82,13 +93,15 @@ UnitTest = {
   failed: 0,
   errors: 0,
 
-  run: function(test_target) {
+  run: function(test_target, have_color) {
     this.target = test_target
+    this.have_color = undefined == have_color ? true : have_color
     var startedAt = new Date()
     puts("Started")
     for (var test_name in test_target) {
       if (test_name.match(/^test_/)) {
         this.tests += 1
+        //Logger.info(test_name)
         test_target[test_name]()
       }
     }
@@ -100,20 +113,20 @@ UnitTest = {
     var finishedAt = new Date()
     var elapsed = (finishedAt - startedAt) / 1000
     puts("Finished in " + elapsed + " seconds.")
-    this.report()
+    return this.report()
   },
 
   report: function() {
     if (this.failed == 0 && this.passed > 0) {
-         puts(with_color('green', this.tests + " tests, " +
+         return string_with_color('green', this.tests + " tests, " +
          this.passed + " assertions, " +
          this.failed + " failures, " +
-         this.errors + " errors"))
-    } else {
-         puts(this.tests + " tests, " +
-         this.passed + " assertions, " +
-         with_color(this.failed > 0 ? 'red' : 'normal', this.failed + " failures") + ", " +
          this.errors + " errors")
+    } else {
+         return this.tests + " tests, " +
+         this.passed + " assertions, " +
+         string_with_color(this.failed > 0 ? 'red' : 'normal', this.failed + " failures") + ", " +
+         this.errors + " errors"
     }
-  },
+  }
 }

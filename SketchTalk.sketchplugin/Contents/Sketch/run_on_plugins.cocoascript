@@ -1,0 +1,10 @@
+// run_on_plugins.cocoascript
+
+jstalk.include("sketchtalk/base.js")
+jstalk.include("sketchtalk/sketch.js")
+
+var onRun = function(context) {
+    var doc = Sketch.onRun(context)
+    var report = UnitTest.suite("tests")
+    doc.showMessage(report)
+}

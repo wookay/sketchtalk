@@ -1,16 +1,28 @@
 # sketchtalk
 
 ```
-# jstalk test_base.js
-Started
-.........................
-Finished in 0.003 seconds.
-5 tests, 25 assertions, 0 failures, 0 errors
+$ cd ~/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins/
+$ # git clone https://github.com/wookay/sketchtalk.git
+$ cd sketchtalk/SketchTalk.sketchplugin/Contents/Sketch/
+$ open examples/hello.sketch
+```
 
-# jstalk test_sketch.js
-Started
-......
-Finished in 0.101 seconds.
-2 tests, 6 assertions, 0 failures, 0 errors
+
+### Testing with JSTalk
+
+* http://jstalk.org/
 
 ```
+$ jstalk run_with_jstalk.js
+Started
+...................................................
+Finished in 0.176 seconds.
+11 tests, 51 assertions, 0 failures, 0 errors
+```
+
+
+### Testing in Sketch
+
+* Plugins / SketchTalk / run regressIon tests (shift cmd i)
+
+![Hello](https://github.com/wookay/sketchtalk/raw/master/SketchTalk.sketchplugin/Contents/Sketch/examples/hello.png)

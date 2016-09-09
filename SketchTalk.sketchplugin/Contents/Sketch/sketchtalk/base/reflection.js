@@ -14,9 +14,8 @@ function _vector_type_of(obj) {
 }
 
 function eltype(obj) {
-    var isjsarray = obj instanceof Array
     var arr = []
-    var len = isjsarray ? obj.length : obj.length()
+    var len = length(obj)
     for (idx=0; idx<len; idx++) {
         var el = obj[idx]
         var typ = type_of(el)
@@ -51,9 +50,7 @@ function type_of(obj) {
                 } else if ("[object String]" == proto) {
                     return 'String'
                 } else {
-                    var str = String(obj)
-                    var a = str.split(":", 1)
-                    return a[0].substring(1)
+                    return undefined == obj.className ? "" : obj.className().toString()
                 }
             } else {
                 return _vector_type_of(obj)

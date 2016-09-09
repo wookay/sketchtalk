@@ -3,7 +3,7 @@
 function isa(obj, className) {
     if (2 == arguments.length) {
         var typ = type_of(obj)
-        return typ == className || issubtype(typ, [className])
+        return or(typ == className, issubtype(typ, [className]))
     }
     else {
         throw new Error("isa: too few arguments (expected 2)")

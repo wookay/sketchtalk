@@ -1,23 +1,31 @@
-#!/usr/bin/env jstalk
+// test_base.js
 
-jstalk.include("jstalk/base.js")
+Test.test_base_bool = function() {
+    assert_equal(undefined, undefined && undefined)
 
-var Test = {}
+    assert_equal(true, true || undefined)
+    assert_equal(undefined, undefined || undefined)
+    assert_equal(undefined, false || undefined)
 
-Test.test_set = function() {
+    assert_equal(false, and(undefined, undefined))
+    assert_equal(false, or(false, undefined))
+}
+
+Test.test_base_set = function() {
     assert(issubset(2, [1,2]))
 }
 
-Test.test_array = function() {
+Test.test_base_array = function() {
     assert(isempty([]))
     assert(!isempty([1]))
 }
 
-Test.test_string = function() {
+Test.test_base_string = function() {
     assert_equal("ab", string("a", "b"))
+    assert_equal("false", string(false))
 }
 
-Test.test_inference = function() {
+Test.test_base_inference = function() {
     assert(issubtype('Int', 'Number'))
     assert(issubtype('Float', 'Number'))
 
@@ -38,7 +46,7 @@ Test.test_inference = function() {
     assert(isa(1.2, 'Number'))
 }
 
-Test.test_reflection= function() {
+Test.test_base_reflection= function() {
     assert_equal(type_of(undefined), 'Undefined'))
     assert_equal(type_of(1), 'Int'))
     var dict = {}
@@ -47,6 +55,3 @@ Test.test_reflection= function() {
     assert_equal(methods(dict), ['a'])
     assert_equal(inspect(dict), "{\"a\":2}")
 }
-
-
-UnitTest.run(Test)

@@ -46,7 +46,7 @@ Test.test_base_inference = function() {
     assert(isa(1.2, 'Number'))
 }
 
-Test.test_base_reflection= function() {
+Test.test_base_reflection = function() {
     assert_equal(type_of(undefined), 'Undefined'))
     assert_equal(type_of(1), 'Int'))
     var dict = {}

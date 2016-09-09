@@ -15,7 +15,7 @@ Test.test_textlayer_attributes = function() {
     var textlayer = Sketch.doc.currentPage().layers().firstObject()
 
     assert_equal(36, textlayer.fontSize())
-    assert_equal("AppleSDGothicNeo-Bold", textlayer.fontPostscriptName().toString())
+    assert_equal("Menlo-Regular", textlayer.fontPostscriptName().toString())
     assert_equal({}, textlayer.textColor())
 
     // null : left
@@ -39,6 +39,6 @@ Test.test_textlayer_text = function() {
 Test.test_textlayer_font = function() {
     var textlayer = Sketch.doc.currentPage().layers().firstObject()
     var font = textlayer.font()
-    assert_equal("AppleSDGothicNeo-Bold", font.fontName().toString())
+    assert_equal("Menlo-Regular", font.fontName().toString())
     assert_equal(36, font.pointSize())
 }

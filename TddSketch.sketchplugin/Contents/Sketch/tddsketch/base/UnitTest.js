@@ -7,7 +7,7 @@ LF = "\n"
 
 
 function puts(str) {
-    print(str)
+    UnitTest.println(str)
     return str
 }
 
@@ -30,14 +30,18 @@ function deep_equal(a,b) {
 }
 
 assert_equal = function(expected, got) {
-  _assert_equal(expected, got, deep_equal(expected, got))
+  if (2==arguments.length) {
+      _assert_equal(expected, got, deep_equal(expected, got))
+  } else {
+      throw new Error(with_color('red', "assert_equal: wrong arguments (expected 2)"))
+  }
 }
 
 assert = function(got) {
    if (1==arguments.length) {
        _assert_equal(true, got, deep_equal(true, got))
    } else {
-       throw new Error("assert: wrong arguments (expected 1)")
+       throw new Error(with_color('red', "assert: wrong arguments (expected 1)"))
    }
 }
 
@@ -46,7 +50,6 @@ var _assert_equal = function(expected, got, is_true) {
     UnitTest.passed_in_progress += 1
     UnitTest.passed += 1
     if (UnitTest.dot_if_passed) {
-      //print(DOT)
     } else {
       puts("passed: " + inspect(expected))
     }
@@ -128,5 +131,10 @@ UnitTest = {
          string_with_color(this.failed > 0 ? 'red' : 'normal', this.failed + " failures") + ", " +
          this.errors + " errors"
     }
+  },
+
+  println: function(str) {
+      print(str)
   }
+
 }

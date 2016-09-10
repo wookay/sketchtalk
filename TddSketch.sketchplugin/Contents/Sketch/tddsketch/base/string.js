@@ -4,7 +4,7 @@ function string(args) {
     var arr = []
     for (idx=0; idx<arguments.length; idx++) {
         var arg = arguments[idx]
-        arr.push("" + arg)
+        arr.push(arg.toString())
     }
     return arr.join("")
 }

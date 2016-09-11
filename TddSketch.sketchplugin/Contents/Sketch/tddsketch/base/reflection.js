@@ -27,7 +27,7 @@ function eltype(obj) {
     } else {
         var enumerator = obj.objectEnumerator()
         while (el = enumerator.nextObject()) {
-            var typ = el.className()
+            var typ = "" + el.className()
             if (!arr.includes(typ)) {
                 arr.push(typ)
             }
@@ -64,7 +64,7 @@ function type_of(obj) {
            }
        }
     }
-    throw new Error("type_of: unknown type")
+    throw_error(Error, "type_of: unknown type")
 }
 
 function methods(obj) {

@@ -1,14 +1,8 @@
 // sketch.js
 
-// jstalk.include("tddsketch/sketch/application.js")
-// jstalk.include("tddsketch/sketch/document.js")
-// jstalk.include("tddsketch/sketch/rectangle.js")
-// jstalk.include("tddsketch/sketch/group.js")
-// jstalk.include("tddsketch/sketch/text.js")
-// jstalk.include("tddsketch/sketch/image.js")
-// jstalk.include("tddsketch/sketch/shape.js")
-// jstalk.include("tddsketch/sketch/artboard.js")
-// jstalk.include("tddsketch/sketch/page.js")
+jstalk.include("tddsketch/sketch/page.js")
+jstalk.include("tddsketch/sketch/layer.js")
+jstalk.include("tddsketch/sketch/test.js")
 
 var Sketch = new function() {
     this.doc = undefined
@@ -43,6 +37,15 @@ var Sketch = new function() {
             }
             print(str)
         }
+        UnitTest.throw_error = function(message) {
+            var extract = extract_functionname_statement_from_stack_trace()
+            var err = "\n" + with_color('red', "Error") + ": " + message + "\nin " + extract
+            this.println(err)
+        }
+        Logger.have_color = false
+        Logger.println = function(str) {
+            UnitTest.println(str)
+        }
         return this.doc
     }
 
@@ -50,7 +53,7 @@ var Sketch = new function() {
         this.app = JSTalk.application_('Sketch')
         this.doc = Sketch.app.orderedDocuments().firstObject()
         if (undefined == this.doc) {
-            throw new Error(with_color('red', "Open a Sketch document."))
+            throw_error(NotFoundError, "Open a Sketch document.")
         }
         this.in_plugins = false
         var url = this.doc.fileURL()
@@ -60,32 +63,9 @@ var Sketch = new function() {
     }
 }
 
-_test_files_recursive = function(dir, test_files) {
-    var fm = NSFileManager.defaultManager()
-    var files = fm.directoryContentsAtPath(dir)
-    if (null == files) {
-        return test_files
-    }
-    for (var idx=0; idx<length(files); idx++) {
-        var name = files[idx].toString()
-        var path = string(dir, "/", name)
-        if (endswith(name, ".js")) {
-            test_files.push(path)
-        } else if (name == Sketch.current_name) {
-            _test_files_recursive(path, test_files)
-        }
-    }
-    return test_files
-}
-
-UnitTest.suite = function(tests_dir) {
-    if ("bukdu" == Sketch.current_name) {
-        tests_dir = "tests/bukdu"
-    }
-    var dir = Sketch.in_plugins ? string(Sketch.context.scriptPath.stringByDeletingLastPathComponent(), "/", tests_dir) : tests_dir
-    var paths = _test_files_recursive(dir, [])
-    for (var idx=0; idx<length(paths); idx++) {
-        jstalk.include(paths[idx])
-    }
-    return UnitTest.run(Test, !Sketch.in_plugins)
+function throw_error(typ, message) {
+    var err = "\n" +
+              with_color('red', typ) + ": " +
+              with_color('white', message)
+    UnitTest.println(err)
 }

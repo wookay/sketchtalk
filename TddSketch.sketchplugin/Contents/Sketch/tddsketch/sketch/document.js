@@ -1,2 +1,0 @@
-var Document = new function() {
-}

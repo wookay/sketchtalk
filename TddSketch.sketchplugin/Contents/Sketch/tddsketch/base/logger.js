@@ -1,6 +1,11 @@
 // logger.js
 
 var Logger = new function() {
+    this.have_color = true
+}
+
+Logger.println = function(str) {
+    print(str)
 }
 
 Logger.info = function(args) {
@@ -8,7 +13,7 @@ Logger.info = function(args) {
     for (idx=0; idx<arguments.length; idx++) {
         arr.push(arguments[idx])
     }
-    print(arr.join(""))
+    this.println(arr.join(""))
 }
 
 text_colors = {
@@ -25,5 +30,5 @@ text_colors = {
 }
 
 function with_color(color, text) {
-    return string(text_colors[color], text, text_colors['normal'])
+    return Logger.have_color ? string(text_colors[color], text, text_colors['normal']) : text
 }

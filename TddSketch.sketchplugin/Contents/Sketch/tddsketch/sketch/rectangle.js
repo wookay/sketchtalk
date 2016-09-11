@@ -1,2 +1,0 @@
-var Rectangle = new function() {
-}

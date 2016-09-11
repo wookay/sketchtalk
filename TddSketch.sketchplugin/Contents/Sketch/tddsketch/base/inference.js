@@ -1,12 +1,16 @@
 // inference.js 
 
+MethodError   = 'MethodError'
+BoundsError   = 'BoundsError'
+NotFoundError = 'NotFoundError'
+
 function isa(obj, name) {
     if (2 == arguments.length) {
         var typ = type_of(obj)
         return or(typ == name, issubtype(typ, [name]))
     }
     else {
-        throw new Error("isa: too few arguments (expected 2)")
+        throw_error(Error, "`isa`: too few arguments (expected 2)")
     }
 }
 

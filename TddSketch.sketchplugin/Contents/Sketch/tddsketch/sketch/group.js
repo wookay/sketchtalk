@@ -1,2 +1,0 @@
-var Group = new function() {
-}

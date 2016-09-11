@@ -1,6 +1,9 @@
 // array.js
 
 function length(arr) {
+    if (null == arr) {
+        throw new Error(with_color('red', "MethodError: no method matching length"))
+    }
     if ('number' == typeof arr.length) {
         return arr.length
     } else {
@@ -15,7 +18,7 @@ function isempty(arr) {
 function last(arr) {
     var len = length(arr)
     if (0 == len) {
-        throw new Error("BoundsError: attempt to access 0-element")
+        throw new Error(with_color('red', "BoundsError: attempt to access 0-element"))
     } else {
         return arr[len-1]
     }

@@ -1,9 +1,9 @@
 // inference.js 
 
-function isa(obj, className) {
+function isa(obj, name) {
     if (2 == arguments.length) {
         var typ = type_of(obj)
-        return or(typ == className, issubtype(typ, [className]))
+        return or(typ == name, issubtype(typ, [name]))
     }
     else {
         throw new Error("isa: too few arguments (expected 2)")

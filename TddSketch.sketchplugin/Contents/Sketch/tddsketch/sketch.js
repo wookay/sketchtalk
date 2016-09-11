@@ -14,7 +14,7 @@ var Sketch = new function() {
     this.doc = undefined
     this.in_plugins = false
     this.context = undefined // plugins
-    this.app = undefined     // jstalk
+    this.app = undefined     // coscript
     this.current_filename = undefined
     this.current_name = undefined
 
@@ -54,15 +54,18 @@ var Sketch = new function() {
         }
         this.in_plugins = false
         var url = this.doc.fileURL()
-        this.current_filename = undefined == url ? "Untitled" : url.lastPathComponent().toString()
+        this.current_filename = undefined == url ? "Untitled" : url.lastPathComponent()
         this.current_name = this.current_filename.split(".")[0]
         return this.doc
     }
 }
 
-_test_files_recursive = function(dir, test_files, depth) {
+_test_files_recursive = function(dir, test_files) {
     var fm = NSFileManager.defaultManager()
     var files = fm.directoryContentsAtPath(dir)
+    if (null == files) {
+        return test_files
+    }
     for (var idx=0; idx<length(files); idx++) {
         var name = files[idx].toString()
         var path = string(dir, "/", name)
@@ -80,7 +83,7 @@ UnitTest.suite = function(tests_dir) {
         tests_dir = "tests/bukdu"
     }
     var dir = Sketch.in_plugins ? string(Sketch.context.scriptPath.stringByDeletingLastPathComponent(), "/", tests_dir) : tests_dir
-    var paths = _test_files_recursive(dir, [], 1)
+    var paths = _test_files_recursive(dir, [])
     for (var idx=0; idx<length(paths); idx++) {
         jstalk.include(paths[idx])
     }

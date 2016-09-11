@@ -13,10 +13,11 @@ Test.test_textlayer_type_of = function() {
 
 Test.test_textlayer_attributes = function() {
     var textlayer = Sketch.doc.currentPage().layers().firstObject()
+    assert(isa(textlayer, 'MSTextLayer'))
 
     assert_equal(36, textlayer.fontSize())
     assert_equal("Menlo-Regular", textlayer.fontPostscriptName().toString())
-    assert_equal({}, textlayer.textColor())
+    assert_equal("(r:0.000000 g:0.000000 b:0.000000 a:1.000000)", textlayer.textColor().toString())
 
     // null : left
     // 1 : right
@@ -34,11 +35,4 @@ Test.test_textlayer_text = function() {
 
     textlayer.replaceTextPreservingAttributeRanges("Hello")
     assert_equal("Hello", textlayer.stringValue().toString())
-}
-
-Test.test_textlayer_font = function() {
-    var textlayer = Sketch.doc.currentPage().layers().firstObject()
-    var font = textlayer.font()
-    assert_equal("Menlo-Regular", font.fontName().toString())
-    assert_equal(36, font.pointSize())
 }

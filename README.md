@@ -8,16 +8,15 @@ $ open examples/hello.sketch
 ```
 
 
-### Testing with JSTalk
+### Testing with CocoaScript
 
-* http://jstalk.org/
+* https://github.com/ccgus/CocoaScript
 
 ```
-$ jstalk run_with_jstalk.js
 Started
-...................................................
-Finished in 0.176 seconds.
-11 tests, 51 assertions, 0 failures, 0 errors
+..................................................
+Finished in 0.149 seconds.
+10 tests, 50 assertions, 0 failures, 0 errors
 ```
 
 

@@ -1,4 +1,4 @@
-// sketch_jstalk.js
+// sketch_coscript.js
 
 jstalk.include("tddsketch/sketch.js")
 
